@@ -1,0 +1,24 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.helphi.grpc;
+
+import "google/protobuf/timestamp.proto";
+
+service Greeter {
+  rpc getQuestionAnswer (QuestionAnswerRequest) returns (QuestionAnswerReply) {}
+}
+
+message QuestionAnswerRequest {
+  string userId = 1;
+}
+
+message QuestionAnswerReply {
+  int64 questionId = 1;
+  int64 conditionId = 2;
+  int64 answerId = 3;
+  string answer = 4;
+  int32 answerValue = 5;
+  google.protobuf.Timestamp answerTimestamp = 6;
+  int64 userId = 7;
+  int32 bucket = 8;
+}

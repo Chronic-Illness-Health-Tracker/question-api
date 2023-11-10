@@ -1,14 +1,15 @@
 HELP.md
-target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/classes
-!**/src/main/**/target/generated-test-sources
-!**/src/main/**/target/maven-archiver
-!**/src/main/**/target/maven-status
-!**/src/main/**/target/protoc-dependancies
-!**/src/main/**/target/protoc-plugins
-!**/src/main/**/target/test-classes
-!**/src/test/**/target/
+/target/classes
+/target/generated-test-sources
+/target/maven-archiver
+/target/annotations
+/target/maven-status
+/target/protoc-dependencies
+/target/protoc-plugins
+/target/test-classes
+/target/**.jar
+**/src/test/**/target/
 
 ### STS ###
 .apt_generated

@@ -4,7 +4,7 @@ package com.helphi.api.grpc;
 
 import "types/answer.proto";
 
-message QuestionReply {
+message Question {
     int64 questionId = 1;
     string conditionId = 2;
     Answer answer = 3;

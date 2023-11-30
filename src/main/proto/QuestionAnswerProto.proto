@@ -8,19 +8,19 @@ import "types/question.proto";
 import "types/requestReply.proto";
 
 service QuestionService {
-    rpc getQuestion(GetQuestionRequest) returns (QuestionReply) {}
+    rpc getQuestion(GetQuestionRequest) returns (Question) {}
     rpc GetConditionQuestions(GetConditionQuestionsRequest) returns (GetConditionQuestionsReply) {}
-    rpc getUserResponse(GetUserReponseRequest) returns (UserResponseReply) {}
+    rpc getUserResponse(GetUserReponseRequest) returns (UserResponse) {}
     rpc getUsersResponses(GetUserReponsesRequest) returns (GetUserReponsesReply) {}
     rpc getUsersResponsesForCondition(GetUsersResponsesForConditionRequest) returns (GetUserReponsesReply) {}
 
-    rpc AddQuestion(QuestionRequest) returns (QuestionReply) {}
-    rpc updateQuestion(QuestionRequest) returns (QuestionReply) {}
+    rpc AddQuestion(QuestionRequest) returns (Question) {}
+    rpc updateQuestion(Question) returns (Question) {}
     rpc deleteQuestion(DeleteQuestionRequest) returns (RequestReply) {}
     rpc deleteAllQuestions(DeleteAllQuestionsRequest) returns (RequestReply) {}
 
-    rpc addUserResponse(UserResponseRequest) returns (UserResponseReply){}
-    rpc updateUserResponse(UserResponseRequest) returns (UserResponseReply) {}
+    rpc addUserResponse(UserResponse) returns (UserResponse){}
+    rpc updateUserResponse(UserResponse) returns (UserResponse) {}
     rpc deleteUserResponse(DeleteUserResponseRequest) returns (RequestReply) {}
     rpc deleteUserResponsesForCondition(DeleteUserResponsesForConditionRequest) returns (RequestReply) {}
     rpc deleteAllUserResponses(DeleteUserResponsesRequest)  returns (RequestReply) {}
@@ -35,7 +35,7 @@ message GetConditionQuestionsRequest {
 }
 
 message GetConditionQuestionsReply {
-    repeated QuestionReply questions = 1;
+    repeated Question questions = 1;
 }
 
 message GetUserReponseRequest {
@@ -49,7 +49,7 @@ message GetUserReponsesRequest {
 }
 
 message GetUserReponsesReply {
-    repeated UserResponseReply response = 1;
+    repeated UserResponse response = 1;
 }
 
 message GetUsersResponsesForConditionRequest {
@@ -63,7 +63,7 @@ message DeleteUserResponseRequest {
 }
 
 message DeleteUserResponsesForConditionRequest {
-    int64 conditionId = 1;
+    string conditionId = 1;
 }
 
 message DeleteUserResponsesRequest {
@@ -75,7 +75,7 @@ message DeleteQuestionRequest {
 }
 
 message DeleteAllQuestionsRequest {
-    int64 questionId = 1;
+    string conditionId = 1;
 }
 
 

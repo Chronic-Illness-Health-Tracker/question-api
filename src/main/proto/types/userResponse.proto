@@ -4,7 +4,7 @@ package com.helphi.api.grpc;
 
 import "google/protobuf/timestamp.proto";  
 
-message UserResponseReply {
+message UserResponse {
     int64 responseId = 1;
     int64 questionId = 2;
     string conditionId = 3;
@@ -14,13 +14,4 @@ message UserResponseReply {
     int32 responseValue = 7;
     google.protobuf.Timestamp answerTimestamp = 8;
     int32 bucket = 9;
-}
-
-message UserResponseRequest {
-    int64 questionId = 1;
-    string conditionId = 2;
-    string userId = 3;
-    string userName = 4;
-    string responseText = 5;
-    int32 responseValue = 6;
 }

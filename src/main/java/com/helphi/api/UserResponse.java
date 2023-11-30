@@ -3,10 +3,12 @@ package com.helphi.api;
 import java.time.Instant;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class UserResponse {
     private long responseId;
     private long questionId;

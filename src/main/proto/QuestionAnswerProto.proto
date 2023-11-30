@@ -1,0 +1,81 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.helphi.api.grpc;
+
+import "types/timescale.proto";
+import "types/userResponse.proto";
+import "types/question.proto";
+import "types/requestReply.proto";
+
+service QuestionService {
+    rpc getQuestion(GetQuestionRequest) returns (QuestionReply) {}
+    rpc GetConditionQuestions(GetConditionQuestionsRequest) returns (GetConditionQuestionsReply) {}
+    rpc getUserResponse(GetUserReponseRequest) returns (UserResponseReply) {}
+    rpc getUsersResponses(GetUserReponsesRequest) returns (GetUserReponsesReply) {}
+    rpc getUsersResponsesForCondition(GetUsersResponsesForConditionRequest) returns (GetUserReponsesReply) {}
+
+    rpc AddQuestion(QuestionRequest) returns (QuestionReply) {}
+    rpc updateQuestion(QuestionRequest) returns (QuestionReply) {}
+    rpc deleteQuestion(DeleteQuestionRequest) returns (RequestReply) {}
+    rpc deleteAllQuestions(DeleteAllQuestionsRequest) returns (RequestReply) {}
+
+    rpc addUserResponse(UserResponseRequest) returns (UserResponseReply){}
+    rpc updateUserResponse(UserResponseRequest) returns (UserResponseReply) {}
+    rpc deleteUserResponse(DeleteUserResponseRequest) returns (RequestReply) {}
+    rpc deleteUserResponsesForCondition(DeleteUserResponsesForConditionRequest) returns (RequestReply) {}
+    rpc deleteAllUserResponses(DeleteUserResponsesRequest)  returns (RequestReply) {}
+}
+
+message GetQuestionRequest {
+    int64 questionId = 1;
+}
+
+message GetConditionQuestionsRequest {
+    string conditionId = 1;
+}
+
+message GetConditionQuestionsReply {
+    repeated QuestionReply questions = 1;
+}
+
+message GetUserReponseRequest {
+    string userId = 1;
+    string conditionId = 2;
+}
+
+message GetUserReponsesRequest {
+    string userId = 1;
+    Timescale Timescale = 2;
+}
+
+message GetUserReponsesReply {
+    repeated UserResponseReply response = 1;
+}
+
+message GetUsersResponsesForConditionRequest {
+    string userId = 1;
+    string conditionId = 2;
+    Timescale Timescale = 3;
+}
+
+message DeleteUserResponseRequest { 
+    int64 responseId = 1;
+}
+
+message DeleteUserResponsesForConditionRequest {
+    int64 conditionId = 1;
+}
+
+message DeleteUserResponsesRequest {
+    string userId = 1;
+}
+
+message DeleteQuestionRequest {
+    int64 questionId = 1;
+}
+
+message DeleteAllQuestionsRequest {
+    int64 questionId = 1;
+}
+
+

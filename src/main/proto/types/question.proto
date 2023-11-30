@@ -1,0 +1,16 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.helphi.api.grpc;
+
+import "types/answer.proto";
+
+message QuestionReply {
+    int64 questionId = 1;
+    string conditionId = 2;
+    Answer answer = 3;
+}
+
+message QuestionRequest {
+    string conditionId = 1;
+    Answer answer = 2;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.helphi.api.grpc;
+
+message Timescale {
+    TIME time = 1;
+    int32 duration = 2 ;
+}
+
+enum TIME {
+    HOURS = 0;
+    DAYS = 1;
+    WEEKS = 2;
+}

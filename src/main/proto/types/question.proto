@@ -3,11 +3,13 @@ option java_multiple_files = true;
 package com.helphi.api.grpc;
 
 import "types/answer.proto";
+import "google/protobuf/timestamp.proto"; 
 
 message Question {
     int64 questionId = 1;
     string conditionId = 2;
     Answer answer = 3;
+    google.protobuf.Timestamp createdAt = 4;
 }
 
 message QuestionRequest {

@@ -28,6 +28,7 @@ service QuestionService {
 
 message GetQuestionRequest {
     int64 questionId = 1;
+    string conditionId = 2;
 }
 
 message GetConditionQuestionsRequest {

@@ -1,5 +1,7 @@
 package com.helphi.api.mapper;
 
+import java.time.Instant;
+
 public class QuestionMapper implements Mapper<com.helphi.api.Question, com.helphi.api.grpc.Question> {
 
     @Override
@@ -15,6 +17,10 @@ public class QuestionMapper implements Mapper<com.helphi.api.Question, com.helph
             .questionId(grpcObject.getQuestionId())
             .conditionId(grpcObject.getConditionId())
             .answer(answer)
+            .createdAt(Instant.ofEpochSecond(
+                grpcObject.getCreatedAt().getSeconds(),
+                grpcObject.getCreatedAt().getNanos())
+            )
             .build();
     }
 
@@ -24,14 +30,22 @@ public class QuestionMapper implements Mapper<com.helphi.api.Question, com.helph
         if(apiObject == null) {
             return null;
         }
+
+        com.helphi.api.grpc.Question.Builder builder = com.helphi.api.grpc.Question.newBuilder()
+            .setQuestionId(apiObject.getQuestionId())
+            .setConditionId(apiObject.getConditionId())
+            .setCreatedAt(com.google.protobuf.Timestamp.newBuilder()
+                .setSeconds(apiObject.getCreatedAt().getEpochSecond())
+                .setNanos(apiObject.getCreatedAt().getNano())
+            .build());
         
         AnswerMapper answerMapper = new AnswerMapper();
         com.helphi.api.grpc.Answer answer = answerMapper.mapToGrpc(apiObject.getAnswer());
-        return com.helphi.api.grpc.Question.newBuilder()
-            .setQuestionId(apiObject.getQuestionId())
-            .setConditionId(apiObject.getConditionId())
-            .setAnswer(answer)
-            .build();
+
+        if(answer != null) {
+            builder.setAnswer(answer);
+        }
+
+        return builder.build();
     }
-    
 }

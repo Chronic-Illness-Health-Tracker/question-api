@@ -1,15 +1,15 @@
-package com.helphi.api.mapper;
+package com.helphi.question.api.mapper;
 
-public class AnswerMapper implements Mapper<com.helphi.api.Answer, com.helphi.api.grpc.Answer> {
+public class AnswerMapper implements Mapper<com.helphi.question.api.Answer, com.helphi.api.grpc.Answer> {
 
     @Override
-    public com.helphi.api.Answer mapFromGrpc(com.helphi.api.grpc.Answer grpcObject) {
+    public com.helphi.question.api.Answer mapFromGrpc(com.helphi.api.grpc.Answer grpcObject) {
 
         if(grpcObject == null) {
             return null;
         }
 
-        return com.helphi.api.Answer.builder()
+        return com.helphi.question.api.Answer.builder()
             .answerId(grpcObject.getAnswerId())
             .questionId(grpcObject.getQuestionId())
             .answerText(grpcObject.getAnswerText())
@@ -18,7 +18,7 @@ public class AnswerMapper implements Mapper<com.helphi.api.Answer, com.helphi.ap
     }
 
     @Override
-    public com.helphi.api.grpc.Answer mapToGrpc(com.helphi.api.Answer apiObject) {
+    public com.helphi.api.grpc.Answer mapToGrpc(com.helphi.question.api.Answer apiObject) {
 
         if(apiObject == null) {
             return null;

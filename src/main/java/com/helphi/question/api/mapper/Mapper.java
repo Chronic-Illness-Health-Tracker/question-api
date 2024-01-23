@@ -1,4 +1,4 @@
-package com.helphi.api.mapper;
+package com.helphi.question.api.mapper;
 
 public interface Mapper<T, S> {
 

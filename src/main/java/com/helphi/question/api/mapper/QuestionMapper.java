@@ -1,19 +1,19 @@
-package com.helphi.api.mapper;
+package com.helphi.question.api.mapper;
 
 import java.time.Instant;
 
-public class QuestionMapper implements Mapper<com.helphi.api.Question, com.helphi.api.grpc.Question> {
+public class QuestionMapper implements Mapper<com.helphi.question.api.Question, com.helphi.api.grpc.Question> {
 
     @Override
-    public com.helphi.api.Question mapFromGrpc(com.helphi.api.grpc.Question grpcObject) {
+    public com.helphi.question.api.Question mapFromGrpc(com.helphi.api.grpc.Question grpcObject) {
         if(grpcObject == null) {
             return null;
         }
 
         AnswerMapper answerMapper = new AnswerMapper();
-        com.helphi.api.Answer answer = answerMapper.mapFromGrpc(grpcObject.getAnswer());
+        com.helphi.question.api.Answer answer = answerMapper.mapFromGrpc(grpcObject.getAnswer());
 
-        return com.helphi.api.Question.builder()
+        return com.helphi.question.api.Question.builder()
             .questionId(grpcObject.getQuestionId())
             .conditionId(grpcObject.getConditionId())
             .answer(answer)
@@ -25,7 +25,7 @@ public class QuestionMapper implements Mapper<com.helphi.api.Question, com.helph
     }
 
     @Override
-    public com.helphi.api.grpc.Question mapToGrpc(com.helphi.api.Question apiObject) {
+    public com.helphi.api.grpc.Question mapToGrpc(com.helphi.question.api.Question apiObject) {
 
         if(apiObject == null) {
             return null;

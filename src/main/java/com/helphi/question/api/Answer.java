@@ -1,4 +1,4 @@
-package com.helphi.api;
+package com.helphi.question.api;
 
 import com.datastax.oss.driver.api.mapper.annotations.Entity;
 

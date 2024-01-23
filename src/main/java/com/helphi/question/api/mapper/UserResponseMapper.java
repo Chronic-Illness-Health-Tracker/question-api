@@ -1,17 +1,17 @@
-package com.helphi.api.mapper;
+package com.helphi.question.api.mapper;
 
 import java.time.Instant;
 
-public class UserResponseMapper implements Mapper<com.helphi.api.UserResponse, com.helphi.api.grpc.UserResponse> {
+public class UserResponseMapper implements Mapper<com.helphi.question.api.UserResponse, com.helphi.api.grpc.UserResponse> {
 
     @Override
-    public com.helphi.api.UserResponse mapFromGrpc(com.helphi.api.grpc.UserResponse grpcObject) {
+    public com.helphi.question.api.UserResponse mapFromGrpc(com.helphi.api.grpc.UserResponse grpcObject) {
 
         if(grpcObject == null) {
             return null;
         }
 
-        return com.helphi.api.UserResponse.builder()
+        return com.helphi.question.api.UserResponse.builder()
             .responseId(grpcObject.getResponseId())
             .questionId(grpcObject.getQuestionId())
             .conditionId(grpcObject.getConditionId())
@@ -29,7 +29,7 @@ public class UserResponseMapper implements Mapper<com.helphi.api.UserResponse, c
     }
 
     @Override
-    public com.helphi.api.grpc.UserResponse mapToGrpc(com.helphi.api.UserResponse apiObject) {
+    public com.helphi.api.grpc.UserResponse mapToGrpc(com.helphi.question.api.UserResponse apiObject) {
         
         if(apiObject == null) {
             return null;

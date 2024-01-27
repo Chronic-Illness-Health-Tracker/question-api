@@ -2,10 +2,10 @@ package com.helphi.question.api.mapper;
 
 import java.time.Instant;
 
-public class QuestionMapper implements Mapper<com.helphi.question.api.Question, com.helphi.api.grpc.Question> {
+public class QuestionMapper implements Mapper<com.helphi.question.api.Question, com.helphi.question.api.grpc.Question> {
 
     @Override
-    public com.helphi.question.api.Question mapFromGrpc(com.helphi.api.grpc.Question grpcObject) {
+    public com.helphi.question.api.Question mapFromGrpc(com.helphi.question.api.grpc.Question grpcObject) {
         if(grpcObject == null) {
             return null;
         }
@@ -25,13 +25,13 @@ public class QuestionMapper implements Mapper<com.helphi.question.api.Question, 
     }
 
     @Override
-    public com.helphi.api.grpc.Question mapToGrpc(com.helphi.question.api.Question apiObject) {
+    public com.helphi.question.api.grpc.Question mapToGrpc(com.helphi.question.api.Question apiObject) {
 
         if(apiObject == null) {
             return null;
         }
 
-        com.helphi.api.grpc.Question.Builder builder = com.helphi.api.grpc.Question.newBuilder()
+        com.helphi.question.api.grpc.Question.Builder builder = com.helphi.question.api.grpc.Question.newBuilder()
             .setQuestionId(apiObject.getQuestionId())
             .setConditionId(apiObject.getConditionId())
             .setCreatedAt(com.google.protobuf.Timestamp.newBuilder()
@@ -40,7 +40,7 @@ public class QuestionMapper implements Mapper<com.helphi.question.api.Question, 
             .build());
         
         AnswerMapper answerMapper = new AnswerMapper();
-        com.helphi.api.grpc.Answer answer = answerMapper.mapToGrpc(apiObject.getAnswer());
+        com.helphi.question.api.grpc.Answer answer = answerMapper.mapToGrpc(apiObject.getAnswer());
 
         if(answer != null) {
             builder.setAnswer(answer);

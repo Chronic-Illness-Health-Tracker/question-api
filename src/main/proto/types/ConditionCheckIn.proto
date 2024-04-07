@@ -1,0 +1,9 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.helphi.question.api.grpc;
+
+message ConditionCheckIn {
+  string conditionId = 1;
+  int32 subclinicalScore = 2;
+  int32 unwellScore = 3;
+}

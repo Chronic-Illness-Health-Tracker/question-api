@@ -10,10 +10,8 @@ public class AnswerMapper implements Mapper<com.helphi.question.api.Answer, com.
         }
 
         return com.helphi.question.api.Answer.builder()
-            .answerId(grpcObject.getAnswerId())
-            .questionId(grpcObject.getQuestionId())
             .answerText(grpcObject.getAnswerText())
-            .answerValue(grpcObject.getAnswerValue())
+            .answerScore(grpcObject.getAnswerScore())
             .build();
     }
 
@@ -25,10 +23,8 @@ public class AnswerMapper implements Mapper<com.helphi.question.api.Answer, com.
         }
         
         return com.helphi.question.api.grpc.Answer.newBuilder()
-            .setAnswerId(apiObject.getAnswerId())
-            .setQuestionId(apiObject.getQuestionId())
             .setAnswerText(apiObject.getAnswerText())
-            .setAnswerValue(apiObject.getAnswerValue())
+            .setAnswerScore(apiObject.getAnswerScore())
             .build();
     }
 }

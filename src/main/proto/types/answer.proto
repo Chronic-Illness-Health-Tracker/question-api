@@ -3,9 +3,7 @@ option java_multiple_files = true;
 package com.helphi.question.api.grpc;
 
 message Answer {
-    int64 answerId = 1;
-    int64 questionId = 2;
-    string answerText = 3;
-    int32 answerValue = 4;
+    string answerText = 1;
+    int32 answerScore = 2;
 }
 

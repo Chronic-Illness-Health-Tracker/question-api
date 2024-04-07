@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 public class Answer {
-    private long answerId;
-    private long questionId;
     private String answerText;
-    private int answerValue;
+    private int answerScore;
 }

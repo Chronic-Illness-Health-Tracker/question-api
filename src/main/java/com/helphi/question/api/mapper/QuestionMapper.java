@@ -1,6 +1,10 @@
 package com.helphi.question.api.mapper;
 
+import com.helphi.question.api.QuestionType;
+
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class QuestionMapper implements Mapper<com.helphi.question.api.Question, com.helphi.question.api.grpc.Question> {
 
@@ -10,18 +14,13 @@ public class QuestionMapper implements Mapper<com.helphi.question.api.Question, 
             return null;
         }
 
-        AnswerMapper answerMapper = new AnswerMapper();
-        com.helphi.question.api.Answer answer = answerMapper.mapFromGrpc(grpcObject.getAnswer());
-
         return com.helphi.question.api.Question.builder()
-            .questionId(grpcObject.getQuestionId())
-            .conditionId(grpcObject.getConditionId())
-            .answer(answer)
-            .createdAt(Instant.ofEpochSecond(
-                grpcObject.getCreatedAt().getSeconds(),
-                grpcObject.getCreatedAt().getNanos())
-            )
-            .build();
+                .questionId(grpcObject.getQuestionId())
+                .conditionId(grpcObject.getConditionId())
+                .questionType(QuestionType.valueOf(grpcObject.getQuestionType()))
+                .possibleAnswers(new HashSet<String>(grpcObject.getPossibleAnswersList()))
+                .answerScore(grpcObject.getAnswerScoreList())
+                .build();
     }
 
     @Override
@@ -32,19 +31,11 @@ public class QuestionMapper implements Mapper<com.helphi.question.api.Question, 
         }
 
         com.helphi.question.api.grpc.Question.Builder builder = com.helphi.question.api.grpc.Question.newBuilder()
-            .setQuestionId(apiObject.getQuestionId())
-            .setConditionId(apiObject.getConditionId())
-            .setCreatedAt(com.google.protobuf.Timestamp.newBuilder()
-                .setSeconds(apiObject.getCreatedAt().getEpochSecond())
-                .setNanos(apiObject.getCreatedAt().getNano())
-            .build());
-        
-        AnswerMapper answerMapper = new AnswerMapper();
-        com.helphi.question.api.grpc.Answer answer = answerMapper.mapToGrpc(apiObject.getAnswer());
-
-        if(answer != null) {
-            builder.setAnswer(answer);
-        }
+                .setQuestionId(apiObject.getQuestionId())
+                .setConditionId(apiObject.getConditionId())
+                .setQuestionType(String.valueOf(apiObject.getQuestionType()))
+                .addAllPossibleAnswers(apiObject.getPossibleAnswers())
+                .addAllAnswerScore(apiObject.getAnswerScore());
 
         return builder.build();
     }

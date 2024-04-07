@@ -6,6 +6,8 @@ import "types/timescale.proto";
 import "types/userResponse.proto";
 import "types/question.proto";
 import "types/requestReply.proto";
+import "types/PatientStatus.proto";
+import "types/ConditionCheckIn.proto";
 
 service QuestionService {
     rpc getQuestion(GetQuestionRequest) returns (Question) {}
@@ -24,6 +26,13 @@ service QuestionService {
     rpc deleteUserResponse(DeleteUserResponseRequest) returns (RequestReply) {}
     rpc deleteUserResponsesForCondition(DeleteUserResponsesForConditionRequest) returns (RequestReply) {}
     rpc deleteAllUserResponses(DeleteUserResponsesRequest)  returns (RequestReply) {}
+
+    rpc getRecentPatientStatus(ListPatientStatusRequest) returns (PatientStatusList) {}
+    rpc getCurrentPatientStatus(GetUserStatusRequest) returns (PatientStatus) {}
+
+    rpc addCheckIn(ConditionCheckIn) returns (RequestReply) {}
+    rpc updateCheckIn(ConditionCheckIn) returns (RequestReply) {}
+
 }
 
 message GetQuestionRequest {
@@ -77,6 +86,11 @@ message DeleteQuestionRequest {
 
 message DeleteAllQuestionsRequest {
     string conditionId = 1;
+}
+
+message GetUserStatusRequest {
+    string userId = 1;
+    string conditionId = 2;
 }
 
 

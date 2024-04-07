@@ -11,20 +11,19 @@ public class UserResponseMapper implements Mapper<com.helphi.question.api.UserRe
             return null;
         }
 
+        AnswerMapper answerMapper = new AnswerMapper();
+
         return com.helphi.question.api.UserResponse.builder()
-            .responseId(grpcObject.getResponseId())
-            .questionId(grpcObject.getQuestionId())
-            .conditionId(grpcObject.getConditionId())
-            .userId(grpcObject.getUserId())
-            .userName(grpcObject.getUserName())
-            .responseText(grpcObject.getResponseText())
-            .responseValue(grpcObject.getResponseValue())
-            .answerTimestamp(
-                Instant.ofEpochSecond(
-                    grpcObject.getAnswerTimestamp().getSeconds(),
-                    grpcObject.getAnswerTimestamp().getNanos())
-            )
-            .bucket(0)
+                .responseId(grpcObject.getResponseId())
+                .questionId(grpcObject.getQuestionId())
+                .conditionId(grpcObject.getConditionId())
+                .userId(grpcObject.getUserId())
+                .answer(answerMapper.mapFromGrpc(grpcObject.getAnswer()))
+                .timestamp(
+                        Instant.ofEpochSecond(
+                                grpcObject.getTimestamp().getSeconds(),
+                                grpcObject.getTimestamp().getNanos())
+                )
             .build();
     }
 
@@ -35,19 +34,28 @@ public class UserResponseMapper implements Mapper<com.helphi.question.api.UserRe
             return null;
         }
 
+        long timestampSeconds;
+        int timestampNanos;
+        if(apiObject.getTimestamp() == null){
+            timestampSeconds = 0;
+            timestampNanos = 0;
+        } else {
+            timestampSeconds = apiObject.getTimestamp().getEpochSecond();
+            timestampNanos = apiObject.getTimestamp().getNano();
+        }
+
+        AnswerMapper answerMapper = new AnswerMapper();
+
         return com.helphi.question.api.grpc.UserResponse.newBuilder()
-            .setResponseId(apiObject.getResponseId())
-            .setQuestionId(apiObject.getQuestionId())
-            .setConditionId(apiObject.getConditionId())
-            .setUserId(apiObject.getUserId())
-            .setUserName(apiObject.getUserName())
-            .setResponseText(apiObject.getResponseText())
-            .setResponseValue(apiObject.getResponseValue())
-            .setAnswerTimestamp(com.google.protobuf.Timestamp.newBuilder()
-                .setSeconds(apiObject.getAnswerTimestamp().getEpochSecond())
-                .setNanos(apiObject.getAnswerTimestamp().getNano())
-                .build())
-            .setBucket(apiObject.getBucket())
+                .setResponseId(apiObject.getResponseId())
+                .setQuestionId(apiObject.getQuestionId())
+                .setConditionId(apiObject.getConditionId())
+                .setUserId(apiObject.getUserId())
+                .setAnswer(answerMapper.mapToGrpc(apiObject.getAnswer()))
+                .setTimestamp(com.google.protobuf.Timestamp.newBuilder()
+                        .setSeconds(timestampSeconds)
+                        .setNanos(timestampNanos)
+                        .build())
             .build();
     }
 }

@@ -8,11 +8,16 @@ import "google/protobuf/timestamp.proto";
 message Question {
     int64 questionId = 1;
     string conditionId = 2;
-    Answer answer = 3;
-    google.protobuf.Timestamp createdAt = 4;
+    string questionType = 3;
+    repeated string possibleAnswers = 4;
+    repeated int32 answerScoreRange = 5;
+    repeated int32 answerScore = 6;
 }
 
 message QuestionRequest {
     string conditionId = 1;
-    Answer answer = 2;
+    string QuestionType = 2;
+    repeated string possibleAnswers = 3;
+    repeated int32 answerScoreRange = 4;
+    repeated int32 answerScore = 5;
 }

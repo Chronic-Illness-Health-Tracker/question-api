@@ -1,0 +1,21 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.helphi.question.api.grpc;
+
+import "google/protobuf/timestamp.proto";
+
+message PatientStatus {
+    string status = 1;
+    int32 score = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
+
+message PatientStatusList {
+    repeated PatientStatus statuses = 1;
+}
+
+message ListPatientStatusRequest {
+    int32 days = 1;
+    string conditionId = 2;
+    string patientId = 3;
+}

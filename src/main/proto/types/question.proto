@@ -9,15 +9,15 @@ message Question {
     int64 questionId = 1;
     string conditionId = 2;
     string questionType = 3;
-    repeated string possibleAnswers = 4;
-    repeated int32 answerScoreRange = 5;
-    repeated int32 answerScore = 6;
+    string questionText = 4;
+    repeated Answer possibleAnswers = 5;
+    repeated int32 answerScoreRange = 6;
 }
 
 message QuestionRequest {
     string conditionId = 1;
     string QuestionType = 2;
-    repeated string possibleAnswers = 3;
-    repeated int32 answerScoreRange = 4;
-    repeated int32 answerScore = 5;
+    string questionText = 3;
+    repeated Answer possibleAnswers = 4;
+    repeated int32 answerScoreRange = 5;
 }

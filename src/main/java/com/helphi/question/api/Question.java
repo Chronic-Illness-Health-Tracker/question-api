@@ -27,8 +27,8 @@ public class Question {
     private long questionId;
     @PartitionKey
     private String conditionId;
+    private String questionText;
     private QuestionType questionType;
-    private Set<String> possibleAnswers;
+    private List<Answer> possibleAnswers;
     private Set<Integer> answerScoreRange;
-    private List<Integer> answerScore;
 }

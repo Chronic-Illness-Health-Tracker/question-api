@@ -30,6 +30,7 @@ service QuestionService {
     rpc getRecentPatientStatus(ListPatientStatusRequest) returns (PatientStatusList) {}
     rpc getCurrentPatientStatus(GetUserStatusRequest) returns (PatientStatus) {}
 
+    rpc getCheckIn(GetConditionCheckInRequest) returns (ConditionCheckIn) {}
     rpc addCheckIn(ConditionCheckIn) returns (RequestReply) {}
     rpc updateCheckIn(ConditionCheckIn) returns (RequestReply) {}
 
@@ -41,6 +42,10 @@ message GetQuestionRequest {
 }
 
 message GetConditionQuestionsRequest {
+    string conditionId = 1;
+}
+
+message GetConditionCheckInRequest {
     string conditionId = 1;
 }
 

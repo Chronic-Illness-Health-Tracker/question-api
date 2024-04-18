@@ -1,6 +1,10 @@
 package com.helphi.question.api.mapper;
 
+import com.helphi.question.api.grpc.Answer;
+
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserResponseMapper implements Mapper<com.helphi.question.api.UserResponse, com.helphi.question.api.grpc.UserResponse> {
 
@@ -13,12 +17,18 @@ public class UserResponseMapper implements Mapper<com.helphi.question.api.UserRe
 
         AnswerMapper answerMapper = new AnswerMapper();
 
+        List<com.helphi.question.api.Answer> apiAnswers = new ArrayList<>();
+
+        for(Answer answer : grpcObject.getAnswerList()) {
+            apiAnswers.add(answerMapper.mapFromGrpc(answer));
+        }
+
         return com.helphi.question.api.UserResponse.builder()
                 .responseId(grpcObject.getResponseId())
                 .questionId(grpcObject.getQuestionId())
                 .conditionId(grpcObject.getConditionId())
                 .userId(grpcObject.getUserId())
-                .answer(answerMapper.mapFromGrpc(grpcObject.getAnswer()))
+                .answer(apiAnswers)
                 .timestamp(
                         Instant.ofEpochSecond(
                                 grpcObject.getTimestamp().getSeconds(),
@@ -46,12 +56,18 @@ public class UserResponseMapper implements Mapper<com.helphi.question.api.UserRe
 
         AnswerMapper answerMapper = new AnswerMapper();
 
+        List<Answer> grpcAnswers = new ArrayList<>();
+
+        for (com.helphi.question.api.Answer answer: apiObject.getAnswer()) {
+            grpcAnswers.add(answerMapper.mapToGrpc(answer));
+        }
+
         return com.helphi.question.api.grpc.UserResponse.newBuilder()
                 .setResponseId(apiObject.getResponseId())
                 .setQuestionId(apiObject.getQuestionId())
                 .setConditionId(apiObject.getConditionId())
                 .setUserId(apiObject.getUserId())
-                .setAnswer(answerMapper.mapToGrpc(apiObject.getAnswer()))
+                .addAllAnswer(grpcAnswers)
                 .setTimestamp(com.google.protobuf.Timestamp.newBuilder()
                         .setSeconds(timestampSeconds)
                         .setNanos(timestampNanos)

@@ -10,7 +10,7 @@ message UserResponse {
     int64 questionId = 2;
     string conditionId = 3;
     string userId = 4;
-    Answer answer = 5;
+    repeated Answer answer = 5;
     google.protobuf.Timestamp timestamp = 6;
     int32 bucket = 9;
 }

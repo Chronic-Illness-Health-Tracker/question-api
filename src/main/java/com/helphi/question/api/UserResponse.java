@@ -1,6 +1,7 @@
 package com.helphi.question.api;
 
 import java.time.Instant;
+import java.util.List;
 
 import com.datastax.oss.driver.api.mapper.annotations.ClusteringColumn;
 import com.datastax.oss.driver.api.mapper.annotations.CqlName;
@@ -25,6 +26,6 @@ public class UserResponse {
     private String conditionId;
     @PartitionKey(1)
     private String userId;
-    private Answer answer;
+    private List<Answer> answer;
     private Instant timestamp;
 }

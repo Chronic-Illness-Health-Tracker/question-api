@@ -27,6 +27,7 @@ public class QuestionMapper implements Mapper<com.helphi.question.api.Question, 
         return com.helphi.question.api.Question.builder()
                 .questionId(grpcObject.getQuestionId())
                 .conditionId(grpcObject.getConditionId())
+                .questionText(grpcObject.getQuestionText())
                 .questionType(QuestionType.valueOf(grpcObject.getQuestionType()))
                 .possibleAnswers(apiAnswers)
                 .questionText(grpcObject.getQuestionText())
@@ -49,6 +50,7 @@ public class QuestionMapper implements Mapper<com.helphi.question.api.Question, 
         com.helphi.question.api.grpc.Question.Builder builder = com.helphi.question.api.grpc.Question.newBuilder()
                 .setQuestionId(apiObject.getQuestionId())
                 .setConditionId(apiObject.getConditionId())
+                .setQuestionText(apiObject.getQuestionText())
                 .setQuestionType(String.valueOf(apiObject.getQuestionType()))
                 .addAllPossibleAnswers(grpcAnswers)
                 .setQuestionText(apiObject.getQuestionText());
